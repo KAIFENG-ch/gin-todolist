@@ -5,6 +5,7 @@ import (
 	"gin-todolist/model"
 	"gin-todolist/pkg/util"
 	"gopkg.in/ini.v1"
+	"log"
 	"strings"
 )
 
@@ -23,11 +24,11 @@ func Init() {
 	file, err := ini.Load("conf/config.ini")
 	if err != nil {
 		util.LogrusObj.Info("配置文件读取错误，请检查文件路径:", err)
-		panic(err)
+		log.Fatal(err)
 	}
 	if err := LoadLocales("conf/locales/zh-cn.yaml"); err != nil {
 		util.LogrusObj.Info(err) //日志内容
-		panic(err)
+		log.Fatal(err)
 	}
 	LoadServer(file)
 	LoadMysqlData(file)
